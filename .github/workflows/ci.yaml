@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  check:
+    name: Rust CI
+    runs-on: windows-latest
+
+    steps:
+      # Checkout source code
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Setup Rust
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+          components: rustfmt, clippy
+
+      # Build check
+      - name: Cargo Check
+        run: cargo check --all-targets --all-features
+
+      # Lint check
+      - name: Cargo Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      # Format check
+      - name: Cargo Fmt
+        run: cargo fmt --all -- --check

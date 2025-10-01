@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: windows-latest
+
+    steps:
+      # Checkout source code
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Setup Rust
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      # Compile Windows binary (.exe)
+      - name: Add Windows target
+        run: rustup target add x86_64-pc-windows-gnu
+
+      - name: Build Windows exe
+        run: cargo build --release --target x86_64-pc-windows-gnu
+
+      # Create GitHub Release and upload assets
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            target/x86_64-pc-windows-gnu/release/file-lock-checker.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
