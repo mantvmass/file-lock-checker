@@ -1,0 +1,25 @@
+1 VERSIONINFO
+FILEVERSION {{NUMERIC_VERSION}}
+PRODUCTVERSION {{NUMERIC_VERSION}}
+FILEOS 0x4
+FILETYPE 0x1
+{
+  BLOCK "StringFileInfo"
+  {
+    BLOCK "040904E4"
+    {
+      VALUE "CompanyName", "Phumin Maliwan"
+      VALUE "FileDescription", "Windows file lock detection and unlock utility"
+      VALUE "FileVersion", "{{VERSION}}"
+      VALUE "InternalName", "file-lock-checker"
+      VALUE "LegalCopyright", "Copyright (c) 2025 Phumin Maliwan"
+      VALUE "OriginalFilename", "file-lock-checker.exe"
+      VALUE "ProductName", "File Lock Checker"
+      VALUE "ProductVersion", "{{VERSION}}"
+    }
+  }
+  BLOCK "VarFileInfo"
+  {
+    VALUE "Translation", 0x409, 1252
+  }
+}

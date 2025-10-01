@@ -1,3 +1,6 @@
+// Copyright (c) 2025 Phumin Maliwan
+// SPDX-License-Identifier: MIT
+
 use std::env;
 use std::ffi::OsString;
 use std::fs::OpenOptions;
